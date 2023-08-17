@@ -1,0 +1,49 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+
+    <div class="container-fluid page-header bg-registration py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <div class="mb-4">
+                        <h1 class="text-white"><span class="text-primary">Share Your Impressions</span></h1>
+                        <h1 class="text-white">Discover New Sights</h1>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header bg-primary text-center p-4">
+                            <h1 class="text-white m-0">Login</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-white p-5">
+                        <div>
+                            <h5>Don't have an account?</h5>
+                                <a class="text-primary text-decoration-none" href="{% url 'register' %}">Register Here</a><br><br/>
+                        </div>
+                            <form method="POST" action="{% url 'login user' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <p  style="color: red">{{ form.non_field_errors }}</p>
+                                {% for field in form %}
+                                    <div>
+                                        <p>
+                                            {{ field.label }}: <br />
+                                            {{ field }}
+                                            {% if form.errors %}
+                                                {% for error in field.errors %}
+                                                    <p  style="color: red">{{error}}</p>
+                                                {% endfor %}
+                                                {% endif %}
+                                    </div>
+                                {% endfor %}
+                                <div>
+                                    <button class="btn btn-primary btn-block py-3" type="submit">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

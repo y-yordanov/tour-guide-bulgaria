@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>GUIDE BULGARIA</title>
+{#    <meta content="width=device-width, initial-scale=1.0" name="viewport">#}
+{#    <meta content="Free HTML Templates" name="keywords">#}
+{#    <meta content="Free HTML Templates" name="description">#}
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static '/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static '/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static '/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Topbar Start -->
+    <div class="container-fluid bg-light pt-3 d-none d-lg-block">
+        <div class="container">
+            <div class="row">
+            </div>
+        </div>
+    </div>
+    <!-- Topbar End -->
+
+
+    <!-- Navbar Start -->
+    <div class="container-fluid position-relative nav-bar p-0">
+        <div class="container-lg position-relative p-0 px-lg-3" style="z-index: 9;">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light shadow-lg py-3 py-lg-0 pl-3 pl-lg-5">
+                <a href="" class="navbar-brand">
+                    <h2 class="m-0 text-primary"><span class="text-dark">GUIDE </span>BULGARIA</h2>
+                </a>
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between px-3" id="navbarCollapse">
+                    <div class="navbar-nav ml-auto py-0">
+                        <a href="{% url 'show index' %}" class="nav-item nav-link active">Home</a>
+                        <a href="{% url 'about us' %}" class="nav-item nav-link">About</a>
+                        <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+
+                        {% if not request.user.is_authenticated %}
+                            <a href="{% url 'login user' %}" class="nav-item nav-link">Login</a>
+                            <a href="{% url 'register' %}" class="nav-item nav-link">Register</a>
+
+                        {% elif request.user.is_authenticated %}
+                            <a href="{% url 'profile details' pk=request.user.pk %}" class="nav-item nav-link">My Profile</a>
+                            <a href="{% url 'user sights' %}" class="nav-item nav-link">My Sights</a>
+                            <a href="{% url 'add sight' %}" class="nav-item nav-link">Add Sight</a>
+                            <a href="{% url 'logout user' %}" class="nav-item nav-link">Logout</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- Navbar End -->
+
+{% block page_content %}
+{% endblock %}
+
+    <!-- Footer Start -->
+    <div class="container-fluid bg-dark text-white-50 py-3 px-sm-3 px-lg-5" style="margin-top: 0px;">
+        <div class="row pt-5">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <a href="" class="navbar-brand">
+                    <h1 class="text-primary"><span class="text-white">GUIDE </span>BULGARIA</h1>
+                </a>
+                <p>We Are Here To Get You Inspired!</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h5 class="text-white text-uppercase mb-4" style="letter-spacing: 5px;">Our address</h5>
+                <p><i class="fa fa-map-marker-alt mr-2"></i>Borisova Street, Razgrad, Bulgaria</p>
+                <p><i class="fa fa-phone-alt mr-2"></i>+84253411</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static '/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static '/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static '/lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static '/lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static '/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    <script src="{% static '/mail/jqBootstrapValidation.min.js' %}"></script>
+    <script src="{% static '/mail/contact.js' %}"></script>
+    <script src="{% static '/mail/contact.php' %}"></script>
+
+    <script src="{% static '/js/main.js' %}"></script>
+
+    <script src="{% static '/js/main.js' %}"></script>
+</body>
+</html>

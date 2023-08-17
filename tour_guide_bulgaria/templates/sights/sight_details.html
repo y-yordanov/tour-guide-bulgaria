@@ -1,0 +1,99 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+
+    <!-- Blog Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Blog Detail Start -->
+                    <div class="pb-3">
+                        <div class="blog-item">
+                            <div class="position-relative">
+                                <img class="img-fluid w-100" src="{{ sight.image.url }}" alt="">
+                                <div class="blog-date">
+                                    <h6 class="font-weight-bold mb-n1">{{ sight.post_date.day }}</h6>
+                                    <small class="text-white text-uppercase">{{ sight.post_date|date:'M' }}</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="bg-white mb-3" style="padding: 30px;">
+                            {% if not is_owner %}
+                                <form action="{% url 'like sight' sight.pk %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" name="sight_id" value="{{ sight_id }}"
+                                            class="btn btn-sm btn-primary">Like Sight
+                                    </button>
+                                </form>
+                            {% endif %}
+                            {% with likes_count as total_likes%}
+                                <p class="likes">{{ total_likes }} like{{ total_likes|pluralize }}</p>
+                            {% endwith %}
+                            {% if is_owner %}
+                                <div class="d-flex mb-3">
+                                    <a class="text-primary text-uppercase text-decoration-none"
+                                       href="{% url 'edit sight' sight.pk %}">Edit Sight</a>
+                                    {#                                <button class="btn btn-sm btn-outline-primary">Edit place</button>#}
+                                    <span class="text-primary px-2">|</span>
+                                    <a class="text-danger text-uppercase text-decoration-none"
+                                       href="{% url 'delete sight' sight.pk %}">Delete Sight</a>
+                                    {#                                <button class="btn btn-sm btn-outline-danger">Delete place</button>#}
+                                </div>
+                            {% endif %}
+
+                            <h3 class="mb-3">{{ sight.name_of_sight }}</h3>
+                            <p>{{ sight.description }}</p>
+                            <h4>Pros: </h4>
+                            <p>{{ sight.pros }}</p>
+                            <h4>Cons: </h4>
+                            <p>{{ sight.cons }}</p>
+                        </div>
+                    </div>
+                    <!-- Blog Detail End -->
+                    <div class="bg-white" style="padding: 30px; margin-bottom: 30px;">
+                        <h4 class="text mb-4">Comments:</h4>
+                        {% with comments.count as total_comments %}
+                            <h5>
+                                {{ total_comments }} comment{{ total_comments|pluralize }}
+                            </h5>
+                        {% endwith %}
+                        {% for comment in comments %}
+                            <img src="{{ comment.user.profile.profile_image.url }}" alt="Image"
+                                 class="img-fluid mr-3 mt-1" style="width: 45px;">
+                            <a href="{% url 'profile details' comment.user.pk %}">{{ comment.user.profile.first_name }}</a>
+                            <small><i>on {{ comment.publication_date_and_time }}</i></small>
+
+                            {{ comment.body|linebreaks }}
+                        {% empty %}
+                        {% endfor %}
+                        <h4>Make a new comment</h4>
+                        <form id="myForm" method="POST" action="{% url 'sight details' sight.pk %}" enctype="multipart/form-data">
+                            {{ form.as_p }}
+                            {% csrf_token %}
+                            <div class="form-group mb-0">
+                                <input type="submit" value="Leave a comment"
+                                       class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-5 mt-lg-0">
+                        <!-- Author Bio -->
+                        <div class="d-flex flex-column text-center bg-white mb-5 py-5 px-4">
+                            <img src="{{ sight_author.profile.profile_image.url }}" class="img-fluid mx-auto mb-3"
+                                 style="width: 100px;">
+                            <h4 class="text-primary mb-1">Added
+                                by {{ sight_author.profile.first_name }} {{ sight_author.profile.last_name }}</h4>
+                            <a class="text-primary text-uppercase text-decoration-none"
+                               href="{% url 'profile details' sight_author.pk %}">Profile Details</a>
+                            <div class="d-flex justify-content-center">
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

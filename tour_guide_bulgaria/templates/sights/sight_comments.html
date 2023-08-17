@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+
+    <!-- Blog Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-8">
+                    <div class="bg-white mb-3 text-center" style="padding: 30px;">
+                        <h4 class="text-uppercase mb-4" style="letter-spacing: 5px;">Leave a comment</h4>
+                        <form method="POST" action="{% url 'comment sight' sight.pk %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+
+                                <textarea name="body" cols="30" rows="5" class="form-control"></textarea>
+                            </div>
+{#                            {% if form.errors %}#}
+{#                                {% for field in form %}#}
+{#                                    {% for error in field.errors %}#}
+{#                                        <p> {{ error }} </p>#}
+{#                                    {% endfor %}#}
+{#                                {% endfor %}#}
+{#                            {% endif %}#}
+                            <div class="form-group mb-0">
+                                <input type="submit" value="Leave a comment"
+                                       class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                            </div>
+                        </form>
+                    </div>
+                </div>   <!-- Comment Form End -->
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

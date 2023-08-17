@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+
+    <div class="container-fluid page-header bg-registration py-5">
+        <div class="container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-5">
+                    <div class="mb-4">
+                        <h1 class="text-white"><span class="text-primary">Share Your Impressions</span></h1>
+                        <h1 class="text-white">Discover New Sights</h1>
+                    </div>
+                </div>
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header bg-primary text-center p-4">
+                            <h1 class="text-white m-0">Sign Up Now</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-white p-5"><div>
+                            <h5>Already have an account?</h5>
+                                <a class="text-primary text-decoration-none" href="{% url 'login user' %}">Login Here</a><br><br/>
+                            </div>
+                            <form method="POST" action="{% url 'register' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {% for field in form %}
+                                    <div>
+                                        <p>
+                                            {{ field.label }}: <br/>
+                                            {{ field }}
+                                            {% if form.errors %}
+                                                {% for error in field.errors %}
+                                                    <p  style="color: red">{{error}}</p>
+                                            {% endfor %}
+                                            {% endif %}
+                                    </div>
+                                {% endfor %}
+                                <div>
+                                    <button class="btn btn-primary btn-block py-3" type="submit">Sign Up Now</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

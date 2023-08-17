@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header bg-primary text-center p-4">
+                            <h1 class="text-white m-0">Add Sight</h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-white p-5">
+                            <form method="POST" action="{% url 'add sight' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ form}}
+                                <div>
+                                    <button class="btn btn-primary btn-block py-3" type="submit">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

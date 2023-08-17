@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+    <div class="container-fluid py-5">
+        <div class="container pt-5">
+            <div class="row">
+                    <div class="col-lg-6 pt-5 pb-lg-5">
+                        <div class="position-relative h-100 p-4 p-lg-5 my-lg-0">
+                        <img class="position-static w-100 h-100" src="{{profile.profile_image.url}}" style="object-fit: cover;">
+                    </div>
+
+                </div>
+                <div class="col-lg-6 pt-5 pb-lg-5">
+                    <div class="about-text bg-white p-4 p-lg-5 my-lg-5">
+                        <h5 class="text-primary text-uppercase" style="letter-spacing: 5px;">About Me</h5>
+                        <h5 class="mb-3">Name: {{ profile.first_name}} {{ profile.last_name}}</h5>
+                        <h5 class="mb-3">Who am I?:</h5>
+                        <p>{{ profile.about }}</p>
+                        <h5 class="mb-3">My Age: {{ profile.age }}</h5>
+                        <h5 class="mb-3">My Sights Are: {{ user_sights_count }}</h5>
+                                      {% if is_owner %}
+                                <div class="d-flex mb-3">
+                                    <a class="text-primary text-uppercase text-decoration-none" href="{% url 'edit profile' user.id  %}">Update Profile</a>
+{#                                <button class="btn btn-sm btn-outline-primary">Edit place</button>#}
+                                    <span class="text-primary px-2">|</span>
+                                    <a class="text-danger text-uppercase text-decoration-none" href="{% url 'delete profile' user.id %}">Delete Profile</a>
+                                    </div>
+                                          <div>
+                                        <a class="text-primary text-uppercase text-decoration-none" href="{% url 'edit password' %}">change password</a>
+                                    </div>
+                            {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

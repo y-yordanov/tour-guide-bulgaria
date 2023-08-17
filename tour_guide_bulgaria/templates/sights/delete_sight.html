@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-lg-8">
+                    <div class="pb-3">
+                        <div class="bg-white mb-3 align-items-center justify-content-center" style="padding: 30px;">
+                            <form method="POST" class="align-items-center justify-content-center">
+                                    {% csrf_token %}
+                                <h3>Are you sure you want to delete this sight?</h3><br/><br/>
+                                <div class="container">
+                                    <div class="center" style="margin: auto; position: relative; left: 40%">
+                                        <button class="btn btn-danger btn-sm py-3 text-center justify-content-center align-items-center"  type="submit">Delete Sight</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

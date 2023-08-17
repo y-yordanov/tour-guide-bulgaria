@@ -1,0 +1,48 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    {% load static %}
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            {% if sender_name %}
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Thank you, {{ sender_name }}</h6>
+                <h3>Your message has been sent successfully.</h3>
+            </div>
+            {% else %}
+            <div class="text-center mb-3 pb-3">
+                <h6 class="text-primary text-uppercase" style="letter-spacing: 5px;">Contact</h6>
+                <h1>Contact For Any Query</h1>
+            </div>
+            {% endif %}
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form bg-white" style="padding: 30px;">
+                        <div id="success"></div>
+                        <form name="sentMessage" method="POST">
+                            {% csrf_token %}
+                                <div class="control-group">
+                                    <input type="text" class="form-control p-4" name="sender_name" placeholder="Your Name:"
+                                        required="required" data-validation-required-message="Please enter your name"/>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="control-group">
+                                    <input type="email" class="form-control p-4" name="message_email" placeholder="Your Email:"
+                                        required="required" data-validation-required-message="Please enter your mail"/>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="control-group">
+                                    <textarea class="form-control py-3 px-4" rows="5" name="sender_message" placeholder="Message:"
+                                        required="required"
+                                        data-validation-required-message="Please enter your message"></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary py-3 px-4" type="submit" name="sendMessageButton">Send Message</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
